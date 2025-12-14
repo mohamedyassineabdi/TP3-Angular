@@ -1,0 +1,16 @@
+<section class="wish-list">
+	<h2>Wish List</h2>
+	<div *ngIf="!items?.length">
+		<p>Your wish list is empty.</p>
+	</div>
+
+	<ul *ngIf="items?.length" class="wish-items">
+			<li *ngFor="let m of items">
+				<a href="/movie/{{m.id}}" (click)="openMovieInNewTab(m.id); $event.preventDefault();">
+					<img *ngIf="m.poster_path" [src]="'https://image.tmdb.org/t/p/w200'+m.poster_path" alt="{{m.title}} poster"/>
+					<span class="title">{{ m.title }}</span>
+				</a>
+				<button class="remove" (click)="remove(m.id)">Remove</button>
+			</li>
+	</ul>
+</section>

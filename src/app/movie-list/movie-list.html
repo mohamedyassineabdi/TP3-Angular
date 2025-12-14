@@ -1,0 +1,72 @@
+<section class="movie-list">
+	<app-search-bar (search)="onSearch($event)"></app-search-bar>
+
+	<div *ngIf="loading">
+		<p>Loading movies...</p>
+	</div>
+
+	<div *ngIf="!loading && filteredMovies?.length; else noMovies">
+		<ul class="movies">
+							<li *ngFor="let movie of filteredMovies">
+								<a href="#" class="movie-item" (click)="openModal(movie); $event.preventDefault();">
+									<img *ngIf="movie.poster_path" [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" alt="{{movie.title}} poster"/>
+									<div class="meta">
+										<h3>{{ movie.title }}</h3>
+										<p class="date">{{ movie.release_date }}</p>
+										<p class="overview">{{ movie.overview }}</p>
+									</div>
+								</a>
+							</li>
+		</ul>
+	</div>
+
+	<ng-template #noMovies>
+		<div class="empty">
+			<p *ngIf="error">{{ error }}</p>
+			<p *ngIf="!error">No movies found. Try another title.</p>
+		</div>
+	</ng-template>
+
+			<!-- Inline Modal for movie details -->
+			<div *ngIf="selectedMovie || modalLoading" class="movie-modal-overlay" (click)="closeModal()">
+				<div class="movie-modal" (click)="$event.stopPropagation()">
+					<button class="modal-close" (click)="closeModal()" aria-label="Close">✕</button>
+
+					<div *ngIf="modalLoading" class="modal-loading" style="padding:24px;color:#fff">Loading details…</div>
+
+					<div *ngIf="modalError" class="modal-error" style="padding:16px;color:#fdd">{{ modalError }}</div>
+
+					<div *ngIf="selectedMovie" class="detail-card">
+						<div class="poster">
+							<img *ngIf="selectedMovie.poster_path" [src]="'https://image.tmdb.org/t/p/w342' + selectedMovie.poster_path" [alt]="selectedMovie.title + ' poster'" />
+							<ng-template #noPoster2>
+								<div class="no-poster">No image</div>
+							</ng-template>
+						</div>
+
+						<div class="info">
+										<div class="top-actions">
+											<button class="futuristic-btn back" (click)="closeModal()">← Back</button>
+											<button class="wish-btn" (click)="toggleWishModal()" [attr.aria-pressed]="inWishlistModal">
+												<span class="heart">{{ inWishlistModal ? '♥' : '♡' }}</span>
+												<span class="label">{{ inWishlistModal ? 'Remove' : 'Add' }}</span>
+											</button>
+										</div>
+
+							<h2 class="title">{{ selectedMovie.title }}</h2>
+
+							<dl class="meta">
+								<div><dt>Original title</dt><dd>{{ selectedMovie.original_title }}</dd></div>
+								<div><dt>Original language</dt><dd>{{ selectedMovie.original_language }}</dd></div>
+								<div><dt>Release date</dt><dd>{{ selectedMovie.release_date }}</dd></div>
+								<div><dt>Vote average</dt><dd>{{ selectedMovie.vote_average }}</dd></div>
+								<div><dt>Vote count</dt><dd>{{ selectedMovie.vote_count }}</dd></div>
+							</dl>
+
+							<h3>Overview</h3>
+							<p class="overview">{{ selectedMovie.overview }}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+</section>

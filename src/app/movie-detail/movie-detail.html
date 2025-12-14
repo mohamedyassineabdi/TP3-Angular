@@ -1,0 +1,39 @@
+<section class="movie-detail" *ngIf="!loading; else loadingTpl">
+	<div *ngIf="error" class="error">{{ error }}</div>
+
+	<div *ngIf="movie" class="detail-card">
+		<div class="poster">
+			<img *ngIf="movie.poster_path; else noPoster" [src]="'https://image.tmdb.org/t/p/w342' + movie.poster_path" [alt]="movie.title + ' poster'" />
+			<ng-template #noPoster>
+				<div class="no-poster">No image</div>
+			</ng-template>
+		</div>
+
+		<div class="info">
+			<div class="top-actions">
+				<a routerLink="/movies" class="futuristic-btn back" role="button" aria-label="Back to list">← Back</a>
+				<button class="futuristic-btn wish-btn" (click)="toggleWish()" [attr.aria-pressed]="inWishlist" aria-label="Toggle wishlist">
+					<span class="heart">{{ inWishlist ? '♥' : '♡' }}</span>
+					<span class="label">{{ inWishlist ? 'Remove from Wish list' : 'Add to Wish list' }}</span>
+				</button>
+			</div>
+
+			<h2 class="title">{{ movie.title }}</h2>
+
+			<dl class="meta">
+				<div><dt>Original title</dt><dd>{{ movie.original_title }}</dd></div>
+				<div><dt>Original language</dt><dd>{{ movie.original_language }}</dd></div>
+				<div><dt>Release date</dt><dd>{{ movie.release_date }}</dd></div>
+				<div><dt>Vote average</dt><dd>{{ movie.vote_average }}</dd></div>
+				<div><dt>Vote count</dt><dd>{{ movie.vote_count }}</dd></div>
+			</dl>
+
+			<h3>Overview</h3>
+			<p class="overview">{{ movie.overview }}</p>
+		</div>
+	</div>
+</section>
+
+<ng-template #loadingTpl>
+	<div class="loading">Loading movie details...</div>
+</ng-template>

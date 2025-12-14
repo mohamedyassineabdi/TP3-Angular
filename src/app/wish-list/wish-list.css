@@ -1,0 +1,7 @@
+/* Simple wishlist styles */
+.wish-list { padding: 18px; }
+.wish-items { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.wish-items li { display:flex; align-items:center; gap:12px; padding:8px; background:#fff; border-radius:6px; box-shadow:0 6px 18px rgba(0,0,0,0.06); }
+.wish-items img { width:64px; height:96px; object-fit:cover; border-radius:4px; }
+.wish-items .title { font-weight:600; color:#222; }
+.wish-items .remove { margin-left:auto; background:#ff2d95; border:none; color:#fff; padding:6px 10px; border-radius:6px; cursor:pointer }

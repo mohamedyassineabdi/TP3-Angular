@@ -1,0 +1,54 @@
+/* Search bar component styling - futuristic, high-contrast look */
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 20px;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background: #000; /* solid black background */
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 2px solid #FFD700; /* vivid yellow outline */
+  width: 520px;
+  box-shadow: 0 8px 30px rgba(3, 10, 20, 0.6), inset 0 -6px 18px rgba(255,215,0,0.02);
+}
+
+.search-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  margin-right: 12px;
+  padding: 6px;
+  cursor: default;
+}
+
+.search-icon svg path, .search-icon svg circle {
+  stroke: #FFD700;
+}
+
+.search-input {
+  flex: 1;
+  background: transparent;
+  color: #ffd; /* pale yellowish */
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 6px 8px;
+}
+
+.search-input::placeholder {
+  color: #d8bf3a;
+  opacity: 0.9;
+}
+
+/* small responsive adjustment */
+@media (max-width: 600px) {
+  .search-box { width: 100%; padding: 8px; }
+  .search-input { font-size: 14px; }
+}

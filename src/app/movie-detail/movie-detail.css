@@ -1,0 +1,92 @@
+/* Movie detail styling inspired by the provided mock */
+.movie-detail { padding: 22px; }
+.error { color: #c62828; background: #fff6f6; padding: 12px; border-radius: 6px; }
+.loading { padding: 18px; color: #333; }
+
+.detail-card { display: flex; gap: 22px; background: #071018; color: #fff; padding: 18px; border-radius: 8px; align-items: flex-start; }
+.poster img { width: 300px; height: auto; border-radius: 6px; box-shadow: 0 8px 30px rgba(0,0,0,0.6); }
+.poster .no-poster { width: 300px; height: 450px; display:flex; align-items:center; justify-content:center; background:#111; color:#888; border-radius:6px }
+
+.info { flex: 1; }
+.top-actions { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:8px; }
+
+/* Futuristic button base */
+.futuristic-btn {
+  --glow-color: #00d4ff;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  color: #e6f7ff;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.6), 0 0 12px rgba(0,0,0,0.2);
+  transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+  position: relative;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.futuristic-btn::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 11px;
+  pointer-events: none;
+  box-shadow: 0 0 24px var(--glow-color, #00d4ff);
+  opacity: 0.0;
+  transition: opacity 200ms ease;
+}
+.futuristic-btn:focus { outline: none; box-shadow: 0 0 0 3px rgba(0,212,255,0.08); }
+.futuristic-btn:hover { transform: translateY(-3px); filter: saturate(1.05); }
+
+/* Back button (cyan/teal neon) */
+.back {
+  appearance: none;
+  border: none;
+  background: linear-gradient(180deg, rgba(0,212,255,0.06), rgba(0,212,255,0.02));
+  color: #bff7ff;
+  --glow-color: rgba(0,212,255,0.18);
+  padding: 8px 14px;
+  font-weight: 700;
+  border-radius: 10px;
+}
+.back::after { box-shadow: 0 0 18px rgba(0,212,255,0.12); }
+
+/* Wishlist button (magenta/pink neon) */
+.wish-btn {
+  appearance: none;
+  border: none;
+  background: linear-gradient(180deg, rgba(255,45,149,0.08), rgba(255,45,149,0.02));
+  color: #ffd9f0;
+  --glow-color: rgba(255,45,149,0.18);
+  padding: 8px 12px;
+  border-radius: 10px;
+  display:inline-flex;
+  gap:8px;
+  align-items:center;
+}
+.wish-btn .heart { font-size:1.1rem; color:#ff6aa6; text-shadow: 0 4px 14px rgba(255,106,166,0.08); }
+.wish-btn[aria-pressed="true"] { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(255,45,149,0.12), 0 0 26px rgba(255,45,149,0.06); }
+
+/* small neon pulse when active */
+.wish-btn[aria-pressed="true"]::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 14px;
+  box-shadow: 0 0 40px rgba(255,45,149,0.08);
+}
+.title { margin-top: 6px; margin-bottom: 12px; font-size: 1.8rem; color: #fff; }
+.meta { display: grid; grid-template-columns: 160px 1fr; gap: 8px 18px; align-items: start; margin-bottom: 12px; }
+.meta dt { color: #ffd400; font-weight: 700; }
+.meta dd { margin: 0; color: #ddd; }
+.overview { color: #e6e6e6; line-height: 1.5; }
+
+@media (max-width: 880px) {
+  .detail-card { flex-direction: column; align-items: center; }
+  .poster img, .poster .no-poster { width: 220px; }
+  .meta { grid-template-columns: 1fr; }
+  .title { font-size: 1.4rem; text-align: center; }
+}
